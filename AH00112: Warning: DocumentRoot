@@ -1,1 +1,3 @@
 AH00112: Warning: DocumentRoot
+
+vi /etc/nginx/directadmin-vhosts.conf
