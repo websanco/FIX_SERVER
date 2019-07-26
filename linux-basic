@@ -113,6 +113,13 @@ cd /home/game/public_html
 wordpress file here
 
 
+cd /home/game/bakups
+/** FILE SYSTEMT **/
+wordpress backups here
+
+
+
+
 
 
 
