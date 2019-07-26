@@ -1,0 +1,4 @@
+Please make sure /.well-known alias is setup in WWW server.
+cd /usr/local/directadmin/custombuild
+./build update
+./build rewrite_confs
