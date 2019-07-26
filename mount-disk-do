@@ -36,3 +36,11 @@ tmpfs             188344        0    188344   0% /run/user/0
 /dev/sda         1998672     6428   1871004   1% /home   
 
 # /dev/sda 2G
+
+
+
+ mkdir -p /home/admin
+ http://s1.server.pro:2222/CMD_MOVE_USERS
+ 
+
+
