@@ -155,6 +155,13 @@ UUID=e64899eb-665e-41a9-b7da-ed5781a8b3aa                       /               
 /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-01 /mnt/volume-sgp1-01 ext4 defaults,nofail,discard 0 0
 /swapfile none swap defaults 0 0
 
+ #xem đĩa đang được gắn vào hệ thống
+ blkid
+ 
+/dev/vda1: UUID="e64899eb-665e-41a9-b7da-ed5781a8b3aa" TYPE="xfs"
+/dev/vdb: UUID="2019-07-25-02-03-17-00" LABEL="config-2" TYPE="iso9660"
+
+
 
 
 
