@@ -76,7 +76,9 @@ sudo lsblk /dev/disk/by-id/scsi-0DO_Volume_volume-s1
 sudo lsof +f -- /home
 
 8.Dừng các quy trình được liệt kê, sau đó ngắt kết nối hệ thống tập tin:
-sudo umount /mnt/mount_point
+
+(sudo umount /mnt/mount_point) ==> umount /home
+
 9.Viết lại bảng phân vùng
 
 Chúng tôi khuyên bạn nên gdiskviết lại bảng phân vùng. Nó hỗ trợ sao lưu bảng hiện có, di chuyển rõ ràng dữ liệu khôi phục GPT đến cuối đĩa và hoạt động với các phân vùng có kích thước bất kỳ. Các công cụ như growpartđơn giản, nhưng các phiên bản được phân phối với hầu hết các bản phân phối chỉ có thể thay đổi kích thước phân vùng tối đa 2 TB.
@@ -88,6 +90,11 @@ Loại bỏ và tạo lại phân vùng.
 Viết bảng phân vùng mới vào âm lượng.
 
 10.SAO LƯU BẢNG PHÂN VÙNG HIỆN TẠI
+
+yum install gdisk
+
+(rpm -ivh gdisk-0.8.10-1.el6.i686.rpm)
+
 cd ~
 sudo gdisk /dev/disk/by-id/scsi-0DO_Volume_volume-s1
 
@@ -118,6 +125,17 @@ Partition table holds up to 128 entries
 First usable sector is 34, last usable sector is 419430366
 Partitions will be aligned on 2048-sector boundaries
 Total free space is 209719229 sectors (100.0 GiB)
+
+xem 2
+
+Disk /dev/disk/by-id/scsi-0DO_Volume_volume-s1: 10485760 sectors, 5.0 GiB
+Logical sector size: 512 bytes
+Disk identifier (GUID): 7237FC5B-5317-42B4-A050-AC9CC2057090
+Partition table holds up to 128 entries
+First usable sector is 34, last usable sector is 10485726
+Partitions will be aligned on 2048-sector boundaries
+Total free space is 10485693 sectors (5.0 GiB)
+
 
 16.Lưu ý các giá trị Số , Bắt đầu (sector) , Mã và Tên của phân vùng cuối cùng . Trong ví dụ trên, chỉ có một phân vùng duy nhất hiện diện. Chúng tôi sẽ xóa phân vùng này và tạo một phân vùng mới với tất cả các thuộc tính giống nhau ngoại trừ vị trí kết thúc của nó (và do đó, kích thước của nó).
 
@@ -194,7 +212,7 @@ dev/disk/by-id/scsi-0DO_Volume_volume-nyc1-01:       symbolic link to ../../sda
 26.MỞ RỘNG HỆ THỐNG TẬP TIN EXT4 TRÊN MỘT KHỐI ĐƯỢC PHÂN VÙNG
 Nếu /dev/disk/by-idđịnh danh không có sẵn, bạn có thể sử dụng /dev/sd*định danh thay thế.
 
-sudo e2fsck -f /dev/disk/by-id/scsi-0DO_Volume_volume-s1-part1
+sudo e2fsck -f /dev/disk/by-id/scsi-0DO_Volume_volume-s1-part1 (skip)
 
 xem
 e2fsck 1.42.13 (17-May-2015)
