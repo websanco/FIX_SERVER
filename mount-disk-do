@@ -50,7 +50,21 @@ tmpfs             188344        0    188344   0% /run/user/0
 Cannot open: No such file or directory
 /bin/tar: Error is not recoverable: exiting now
 
- ls -all | grep admin1
+https://www.digitalocean.com/community/questions/resizing-existing-attached-volume
+
+1.
+fuser -cuk /mnt/volume-nyc3-02
+2.
+e2fsck -f /dev/disk/by-id/scsi-0DO_Volume_volume-nyc3-02
+3.
+resize2fs /dev/disk/by-id/scsi-0DO_Volume_volume-nyc3-02
+
+sudo resize2fs /dev/disk/by-id/scsi-0DO_Volume_volume-nyc3-02
+
+
+
+
+
  
  #nang cap dubng luong
  
