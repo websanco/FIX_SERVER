@@ -26,3 +26,13 @@ echo '/dev/disk/by-id/scsi-0DO_Volume_volume-s1 /home ext4 defaults,nofail,disca
 
 df -l
 
+
+/dev/vda1       52417516 13402152  39015364  26% /
+devtmpfs          920860        0    920860   0% /dev
+tmpfs             941704        0    941704   0% /dev/shm
+tmpfs             941704    16756    924948   2% /run
+tmpfs             941704        0    941704   0% /sys/fs/cgroup
+tmpfs             188344        0    188344   0% /run/user/0
+/dev/sda         1998672     6428   1871004   1% /home   
+
+# /dev/sda 2G
