@@ -140,7 +140,130 @@ Hex code or GUID (L to show codes, Enter = 8300):
 Changed type of partition to 'Linux filesystem'
 
 
-20.
+20.Quá trình tạo phân vùng không nhắc tên phân vùng GPT nội bộ. Nếu điều này quan trọng với bạn, bạn có thể đặt tên thành giá trị trước đó bằng lệnh c . 
+Một lần nữa, bạn sẽ được nhắc phân vùng hoạt động nếu bạn có sẵn nhiều hơn một:
+
+c
+
+Using 1
+Enter name: primary
+
+21.VIẾT BẢNG PHÂN VÙNG MỚI VÀO Ổ ĐĨA
+hi bạn kết thúc, xác minh bảng phân vùng mới bạn đã tạo. Như chúng tôi đã nêu trước đây, tất cả thông tin trong bảng ở dưới cùng của đầu ra phải khớp với bảng trước đó, ngoại trừ các cột Kết thúc (sector) và Kích thước :
+
+p
+
+xem
+
+Disk /dev/disk/by-id/scsi-0DO_Volume_volume-nyc1-01: 419430400 sectors, 200.0 GiB
+Logical sector size: 512 bytes
+Disk identifier (GUID): 016F1E0A-83C5-4CF2-A78B-150F689CC45A
+Partition table holds up to 128 entries
+First usable sector is 34, last usable sector is 419430366
+Partitions will be aligned on 2048-sector boundaries
+Total free space is 2014 sectors (1007.0 KiB)
+
+Number  Start (sector)    End (sector)  Size       Code  Name
+   1            2048       419430366   200.0 GiB   8300  primary
+   
+22.Sau khi xác minh thông tin, ghi dữ liệu phân vùng vào ổ đĩa và thoát công cụ bằng lệnh w .
+Bạn sẽ được nhắc xác nhận thủ tục. Nhập Y nếu bạn đã sẵn sàng:
+
+w
+
+23.Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): Y
+OK; writing new GUID partition table (GPT) to /dev/disk/by-id/scsi-0DO_Volume_volume-nyc1-01.
+The operation has completed successfully.
+
+
+24.Mở rộng hệ thống tập tin
+sudo umount /home
+sudo lsblk --fs /dev/disk/by-id/scsi-0DO_Volume_volume-s1
+
+25.Bạn có thể ánh xạ /dev/sd*tên cho phân vùng trở lại /dev/disk/by-id
+định danh của nó bằng cách kiểm tra liên kết hiện tại trong /dev/disk/by-id thư mục:
+file /dev/disk/by-id/*
+
+xem
+dev/disk/by-id/scsi-0DO_Volume_volume-nyc1-01:       symbolic link to ../../sda
+/dev/disk/by-id/scsi-0DO_Volume_volume-nyc1-01-part1: symbolic link to ../../sda1
+
+26.MỞ RỘNG HỆ THỐNG TẬP TIN EXT4 TRÊN MỘT KHỐI ĐƯỢC PHÂN VÙNG
+Nếu /dev/disk/by-idđịnh danh không có sẵn, bạn có thể sử dụng /dev/sd*định danh thay thế.
+
+sudo e2fsck -f /dev/disk/by-id/scsi-0DO_Volume_volume-s1-part1
+
+xem
+e2fsck 1.42.13 (17-May-2015)
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+/dev/disk/by-id/scsi-0DO_Volume_volume-nyc1-01-part1: 13/6553600 files (0.0% non-contiguous), 459351/26213888 blocks
+
+27.
+
+sudo resize2fs /dev/disk/by-id/scsi-0DO_Volume_volume-s1-part1
+
+28.Hệ thống tập tin nên được mở rộng. Bây giờ bạn có thể gắn kết nó và xác minh thủ tục:
+
+mount -a
+df -h -x tmpfs -x devtmpfs
+
+xem
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda1        20G  1.1G   18G   6% /
+/dev/sda1       197G   60M  187G   1% /mnt/volume-nyc1-01-part1
+
+29.MỞ RỘNG HỆ THỐNG TỆP XFS TRÊN Ổ ĐĨA ĐƯỢC PHÂN VÙNG
+sudo xfs_repair /dev/disk/by-id/scsi-0DO_Volume_volume-s1-part1
+
+xem
+Phase 1 - find and verify superblock...
+Phase 2 - using internal log
+        - zero log...
+. . .
+Phase 7 - verify and correct link counts...
+done
+
+30. 
+sudo mount -a
+(sudo xfs_growfs /mnt/scsi-0DO_Volume_volume-s1-part1)  ==> sudo xfs_growfs /home/scsi-0DO_Volume_volume-s1-part1
+
+xem
+
+meta-data=/dev/sda1              isize=512    agcount=4, agsize=6553472 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1 spinodes=0
+data     =                       bsize=4096   blocks=26213888, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal               bsize=4096   blocks=12799, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+data blocks changed from 26213888 to 52428539
+
+
+31.
+df -h -x tmpfs -x devtmpfs
+
+xem
+
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda1        20G  1.1G   18G   6% /
+/dev/sdb1       200G   33M  200G   1% /home/scsi-0DO_Volume_volume-s1-part1
+
+
+
+
+
+
+
+   
 
 
 
