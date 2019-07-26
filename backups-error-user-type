@@ -1,0 +1,10 @@
+ls -1 /usr/local/directadmin/data/users/ | grep ^php$ -c
+# grep ^php= /usr/local/directadmin/data/admin/show_all_users.cache -c
+
+
+FIX
+
+cd /usr/local/directadmin/data/users/
+rm -rf tructuyen2
+
+
