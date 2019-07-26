@@ -7,4 +7,9 @@ FIX
 cd /usr/local/directadmin/data/users/
 rm -rf tructuyen2
 
+cd home 
+mkdir domains
+
+
+
 
