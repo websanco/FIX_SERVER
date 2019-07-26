@@ -42,5 +42,14 @@ tmpfs             188344        0    188344   0% /run/user/0
  mkdir -p /home/admin
  http://s1.server.pro:2222/CMD_MOVE_USERS
  
+ 
+ FIX Error Compressing the backup file
+  /bin/tar: domains: Cannot stat: No such file or directory
+/bin/tar: Exiting with failure status due to previous errors
+
+Cannot open: No such file or directory
+/bin/tar: Error is not recoverable: exiting now
+
+ 
 
 
