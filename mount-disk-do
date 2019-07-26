@@ -50,6 +50,8 @@ tmpfs             188344        0    188344   0% /run/user/0
 Cannot open: No such file or directory
 /bin/tar: Error is not recoverable: exiting now
 
+ ls -all | grep admin1
+
  
 
 
