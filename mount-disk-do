@@ -56,6 +56,9 @@ https://www.digitalocean.com/community/questions/resizing-existing-attached-volu
 fuser -cuk /mnt/volume-nyc3-02
 tat kiem soat file fuser -cuk /home/volume-s1
 
+fuser -kxuc /home
+
+
 
 2.
 (e2fsck -f /dev/disk/by-id/scsi-0DO_Volume_volume-nyc3-02)
