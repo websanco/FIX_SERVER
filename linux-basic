@@ -366,6 +366,21 @@ Save the file and reboot the system.
 You can run following command to see that /home directory has been successfully moved into a dedicated partition.
 
 
+#FORMART DISK
+sudo mkfs.ext4 /dev/disk/by-id/scsi-0DO_Volume_volume-s1
+
+
+#GẮN DISK
+# Create a mount point for your volume:
+$ mkdir -p /mnt/volume_s1
+
+# Mount your volume at the newly-created mount point:
+$ mount -o discard,defaults,noatime /dev/disk/by-id/scsi-0DO_Volume_volume-s1 /mnt/volume_s1
+
+# Change fstab so the volume will be mounted after a reboot
+$ echo '/dev/disk/by-id/scsi-0DO_Volume_volume-s1 /mnt/volume_s1 ext4 defaults,nofail,discard 0 0' | sudo tee -a /etc/fstab
+
+
 
 
 
