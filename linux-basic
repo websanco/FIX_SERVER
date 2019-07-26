@@ -95,3 +95,27 @@ mkdir -v <path_name>
 
 
 
+cd /home
+
+/** FILE SYSTEMT **/
+admin  admin1  cache.sh  centos  game   tmp  tructuyen2
+
+
+cd /home/admin1/
+ls
+/** FILE SYSTEMT **/
+
+400.shtml  401.shtml  403.shtml  404.shtml  500.shtml  cgi-bin  index.html  logo.png
+
+
+cd /home/game/public_html
+/** FILE SYSTEMT **/
+wordpress file here
+
+
+
+
+
+
+
+
