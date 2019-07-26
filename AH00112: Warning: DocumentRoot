@@ -1,3 +1,14 @@
 AH00112: Warning: DocumentRoot
 
+FIX
 vi /etc/nginx/directadmin-vhosts.conf
+
+cách 2
+xóa những user không tìm thấy trong directadmin-vhosts.conf
+
+kiểm tra lại bằng httpd
+
+service httpd resrart
+
+
+
