@@ -1,3 +1,7 @@
+
+
+https://unix.stackexchange.com/questions/363420/mapping-the-home-folder-to-a-different-location-in-fstab
+
 In /etc/fstab, the first column is a volume location and the second column is a directory. The directory is the mount point, i.e. where the files will be accessible. The volume location indicates where the files are stored; there are different types of locations depending on the filesystem type. For a “normal” filesystems, the files that are stored on a disk and the volume location is a disk partition. For a network filesystem such as nfs or cifs, this indicates a host name and an exported path on the host, and so on.
 
 What you currently have, /dev/mapper/cl-home, designates a partition using Linux's volume format (LVM). The volume name is in two parts: cl is a volume group (which covers a section of one or more disks), and home is a logical volume inside this volume group. The system doesn't care that the logical volume home and the directory /home have the same name, but it's convenient for humans to use the same name.
