@@ -51,7 +51,113 @@ Cannot open: No such file or directory
 /bin/tar: Error is not recoverable: exiting now
 
  ls -all | grep admin1
+ 
+ #nang cap dubng luong
+ 
+ echo '/dev/disk/by-id/scsi-0DO_Volume_volume-s1 /home ext4 defaults,nofail,discard 0 2' | sudo tee -a /etc/fstab
+ 
+ 1.Xác định xem Âm lượng có được phân vùng không
+ sudo lsblk --fs /dev/disk/by-id/scsi-0DO_Volume_volume-s1
+ 2.Thay đổi kích thước một khối lượng không liên kết
+ sudo resize2fs /dev/disk/by-id/scsi-0DO_Volume_volume-s1
+ 3.Nếu hệ thống tập tin trên ổ đĩa là XFS, hãy vượt qua điểm gắn kết nơi phân vùng được gắn vào xfs_growfscông cụ:
+ (sudo xfs_growfs /mnt/your_mount_point) = =>  sudo xfs_growfs /home
+ 4.Dù bằng cách nào, bạn có thể xác minh rằng hệ thống tệp lớn hơn có sẵn với df:
+ df -h -x tmpfs -x devtmpfs
+ 5.Thay đổi kích thước một phân vùng
+Thay đổi kích thước một khối được phân vùng bao gồm các bước sau:
+-Xác định các phân vùng và các điểm gắn kết và ngắt kết nối tất cả các phân vùng.
+-Viết lại bảng phân vùng.
+-Mở rộng hệ thống tập tin.
+
+6.Xác định và ngắt kết nối
+sudo lsblk /dev/disk/by-id/scsi-0DO_Volume_volume-s1
+7.Trước tiên, bạn có thể cần tìm và chấm dứt mọi quá trình hiện đang truy cập hệ thống tệp được gắn kết:
+sudo lsof +f -- /home
+
+8.Dừng các quy trình được liệt kê, sau đó ngắt kết nối hệ thống tập tin:
+sudo umount /mnt/mount_point
+9.Viết lại bảng phân vùng
+
+Chúng tôi khuyên bạn nên gdiskviết lại bảng phân vùng. Nó hỗ trợ sao lưu bảng hiện có, di chuyển rõ ràng dữ liệu khôi phục GPT đến cuối đĩa và hoạt động với các phân vùng có kích thước bất kỳ. Các công cụ như growpartđơn giản, nhưng các phiên bản được phân phối với hầu hết các bản phân phối chỉ có thể thay đổi kích thước phân vùng tối đa 2 TB.
+Viết lại bảng phân vùng bao gồm bốn bước:
+Bất cứ lúc nào trong quá trình này, bạn có thể gõ ? để hiển thị menu trợ giúp của các lệnh có sẵn.
+Sao lưu bảng hiện tại.
+Di chuyển các cấu trúc dữ liệu GPT sao lưu.
+Loại bỏ và tạo lại phân vùng.
+Viết bảng phân vùng mới vào âm lượng.
+
+10.SAO LƯU BẢNG PHÂN VÙNG HIỆN TẠI
+cd ~
+sudo gdisk /dev/disk/by-id/scsi-0DO_Volume_volume-s1
+
+11.Dấu nhắc thiết bị đầu cuối sẽ thay đổi thành Command (? for help):. Sử dụng blệnh để sao lưu phân vùng hiện tại và nhập tên tệp sao lưu khi được nhắc.
+
+b
+tep sau luu: partition_table.bak
+12.DI CHUYỂN CẤU TRÚC DỮ LIỆU GPT SAO LƯU
+x  
+Lời nhắc của bạn sẽ thay đổi để phản ánh menu phụ mới.
+13.Sau đó di chuyển các cấu trúc sao lưu bảng GPT đến cuối đĩa:
+e
+Relocating backup data structures to the end of the disk
+13.Sau đó quay lại menu chính:
+m
+14.XÓA VÀ TẠO LẠI PHÂN VÙNG CUỐI CÙNG
+ể sử dụng không gian mới trên ổ đĩa, chúng tôi sẽ mở rộng phân vùng cuối cùng vào khu vực trống. Điều này thực sự liên quan đến việc thu thập dữ liệu về phân vùng hiện tại, loại bỏ nó và sau đó tạo lại nó để chiếm không gian bổ sung.
+
+15.Bắt đầu bằng cách hiển thị bảng phân vùng hiện tại:
+
+p
+
+xem 
+disk /dev/disk/by-id/scsi-0DO_Volume_volume-nyc1-01: 419430400 sectors, 200.0 GiB
+Logical sector size: 512 bytes
+Disk identifier (GUID): 016F1E0A-83C5-4CF2-A78B-150F689CC45A
+Partition table holds up to 128 entries
+First usable sector is 34, last usable sector is 419430366
+Partitions will be aligned on 2048-sector boundaries
+Total free space is 209719229 sectors (100.0 GiB)
+
+16.Lưu ý các giá trị Số , Bắt đầu (sector) , Mã và Tên của phân vùng cuối cùng . Trong ví dụ trên, chỉ có một phân vùng duy nhất hiện diện. Chúng tôi sẽ xóa phân vùng này và tạo một phân vùng mới với tất cả các thuộc tính giống nhau ngoại trừ vị trí kết thúc của nó (và do đó, kích thước của nó).
+
+Sử dụng lệnh d để loại bỏ phân vùng. Nếu bạn chỉ có một phân vùng duy nhất, nó sẽ bị xóa. Nếu bạn có nhiều phân vùng, bạn sẽ được nhắc nhập số phân vùng. Chọn phân vùng cuối cùng:
+
+17. Sử dụng lệnh d
+d
+1
+Using 1
+18.Bắt đầu tạo phân vùng mới:
+n
+19.Có khả năng các giá trị chính xác sẽ được đề xuất, trong trường hợp đó bạn chỉ cần nhấn ENTER để chấp nhận các giá trị mặc định.
+Đối với lời nhắc về Khu vực cuối cùng , chấp nhận mặc định để mở rộng phân vùng đến cuối đĩa:
+
+Partition number (1-128, default 1):
+First sector (34-419430366, default = 2048) or {+-}size{KMGTP}:
+Last sector (2048-419430366, default = 419430366) or {+-}size{KMGTP}:
+Current type is 'Linux filesystem'
+Hex code or GUID (L to show codes, Enter = 8300):
+Changed type of partition to 'Linux filesystem'
+
+
+20.
+
+
+
+
+
+
+
+
+
+
+
 
  
+ 
+ 
+ 
+
+
 
 
