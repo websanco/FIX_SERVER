@@ -1,0 +1,25 @@
+In /etc/fstab, the first column is a volume location and the second column is a directory. The directory is the mount point, i.e. where the files will be accessible. The volume location indicates where the files are stored; there are different types of locations depending on the filesystem type. For a “normal” filesystems, the files that are stored on a disk and the volume location is a disk partition. For a network filesystem such as nfs or cifs, this indicates a host name and an exported path on the host, and so on.
+
+What you currently have, /dev/mapper/cl-home, designates a partition using Linux's volume format (LVM). The volume name is in two parts: cl is a volume group (which covers a section of one or more disks), and home is a logical volume inside this volume group. The system doesn't care that the logical volume home and the directory /home have the same name, but it's convenient for humans to use the same name.
+
+If you want to put your home directory on an existing Windows partition, then you can't just change the volume name here: /home would not be the place where a disk filesystem is mounted. There are several ways you can do this:
+
+You can use a bind mount to make /mnt/store/hd2/home also accessible through /home. The fstab entries would be
+
+/dev/sda1  /mnt/store/hd2  ntfs
+/mnt/store/hd2/home  /home  bind
+Note that you are not mounting an NTFS filesystem on /home: it's already mounted on /mnt/store/hd2. You're making a directory tree available at another location; the fact that this other directory tree is entirely located on an NTFS partition is not relevant.
+
+You can make /home a symbolic link to /mnt/store/hd2/home. In this case /home would not appear in /etc/fstab at all.
+
+You can use either a bind mount or a symbolic link for your home directory, and leave the other directories alone.
+
+You can change your home directory to be /mnt/store/hd2/home. Either use a GUI to manage use accounts, or use a command like
+
+sudo usermod --home /mnt/store/hd2/linux-home --move-home joe
+I don't recommend any of these options, because NTFS can't store all the Linux file names, types and attributes. All of these options have further gotchas:
+
+Bind mounts are a very useful tool, but they do have downsides. Files are listed at all the locations in enumerations, which has consequences on locate, etc, etc.
+A symbolic link doesn't have these downsides, but occasionally some software will record the location of your home directory with the symbolic links expanded. Having a symbolic link for /home can also cause problems due to AppArmor policies.
+Even having a home directory outside /home can cause gotchas with security policies, though it should be ok with any major distribution nowadays.
+Rather than put your home directory on an NTFS filesystem, I recommend keeping it on a Linux filesystem. To access your Windows files from Linux, access them under /mnt/store/hd2. Create symbolic links in your home directory to places under /mnt/store/hd2 for convenience.
