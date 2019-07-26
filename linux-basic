@@ -87,6 +87,21 @@ mkdir -m 440 folder
 #lệnh liệt kê file và phân quyền   
 ls -l
 
+#kiểm tra dung lượng đĩa
+df -l
+
+#kiểm tra dung lượng đĩa
+df -hl
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda1        50G   15G   36G  30% /
+devtmpfs        900M     0  900M   0% /dev
+tmpfs           920M     0  920M   0% /dev/shm
+tmpfs           920M   33M  888M   4% /run
+tmpfs           920M     0  920M   0% /sys/fs/cgroup
+tmpfs           184M     0  184M   0% /run/user/0
+
+
+
 folder = r--r--.---  = 440 read--read--.---
 file =   rwxrwxrwx = 777 read write execute  read write execute  read write execute   421 421 421
 
