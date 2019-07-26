@@ -1,0 +1,6 @@
+cd /
+/** FILE SYSTEMT **/
+admin_backups  boot       dev  home  lib64  mnt  proc  run   srv       sys  usr
+bin            core.7241  etc  lib   media  opt  root  sbin  swapfile  tmp  var
+
+
