@@ -380,7 +380,7 @@ $ mount -o discard,defaults,noatime /dev/disk/by-id/scsi-0DO_Volume_volume-s1 /m
 # Change fstab so the volume will be mounted after a reboot
 $ echo '/dev/disk/by-id/scsi-0DO_Volume_volume-s1 /mnt/volume_s1 ext4 defaults,nofail,discard 0 0' | sudo tee -a /etc/fstab
 
-
+cu phap tim file php -i | grep php.ini
 
 
 
