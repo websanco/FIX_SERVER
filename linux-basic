@@ -162,6 +162,27 @@ UUID=e64899eb-665e-41a9-b7da-ed5781a8b3aa                       /               
 /dev/vdb: UUID="2019-07-25-02-03-17-00" LABEL="config-2" TYPE="iso9660"
 
 
+Tôi đã định dạng và phân vùng ổ đĩa chưa sử dụng (/ dev / sdb1)
+Đó không phải là một ổ đĩa. Đó là một phân vùng.
+/ dev / sdb là liên kết đến toàn bộ ổ đĩa. 
+/ dev / sdb1 là phân vùng đầu tiên trên ổ đĩa đó. Nếu bạn chỉ có một phân vùng thì nó thường lớn bằng toàn bộ ổ đĩa.
+
+Câu hỏi 1:
+/dev/sdb1 /home ext4 defaults 0 1
+Điều này có nghĩa là nó sẽ được gắn vào lúc khởi động theo mặc định?
+
+Câu hỏi 2:
+Lưu ý rằng:
+Đây sẽ là 250 GB chứ không phải 250 GB bổ sung
+Nội dung cũ sẽ không thể truy cập trong khi ổ đĩa được gắn kết.
+Những gì bạn có thể muốn làm là khởi động lại vào chế độ người dùng, 
+sau đó di chuyển nội dung từ / home sang một vị trí khác. 
+(ví dụ: mv / nhà /home.old). 
+Sau đó gắn đĩa mới vào không gian cũ của nó (mkdir / home, mount / home) 
+và đảm bảo tất cả các tệp cũ và quyền của chúng sau đó được sao chép vào đĩa mới.
+Hoặc gắn nó dưới / home2 và di chuyển một số người dùng.
+
+
 
 
 
