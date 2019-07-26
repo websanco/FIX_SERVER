@@ -1,1 +1,29 @@
 Error with LetsEncrypt request
+
+Requesting new certificate order...
+new-order error: HTTP/1.1 100 Continue 
+Expires: Fri, 26 Jul 2019 05:47:03 GMT 
+Cache-Control: max-age=0, no-cache, no-store 
+Pragma: no-cache 
+
+HTTP/1.1 400 Bad Request 
+Server: nginx 
+Content-Type: application/problem+json 
+Content-Length: 178 
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index" 
+Replay-Nonce: m1Y8QLMPiaxMQci-9YSttZK_8Eb_b0e-HIXNYllRUO8 
+Expires: Fri, 26 Jul 2019 05:47:04 GMT 
+Cache-Control: max-age=0, no-cache, no-store 
+Pragma: no-cache 
+Date: Fri, 26 Jul 2019 05:47:04 GMT 
+Connection: close 
+
+{
+ "type": "urn:ietf:params:acme:error:malformed",
+ "detail": "Malformed account ID in KeyID header URL: \"https://acme-v02.api.letsencrypt.org/acme/acct/\"",
+ "status": 400
+}. Exiting...
+
+
+
+HOW FIX
