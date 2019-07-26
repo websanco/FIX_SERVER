@@ -6,6 +6,49 @@ admin_backups  boot       dev  home  lib64  mnt  proc  run   srv       sys  usr
 bin            core.7241  etc  lib   media  opt  root  sbin  swapfile  tmp  var
 
 
+
+
+/bin – chứa các ứng dụng quan trọng (binary applications).
+/boot – các tập tin cấu hình cho quá trình khởi động hệ thống (boot configuration files)
+/dev – chứa các tập tin là chứng nhận cho các thiết bị của hệ thống (device files)
+/etc – chứa các tập tin cấu hình của hệ thống, các tập tin lệnh để khởi động các dịch vụ của hệ thống…
+/home – thư mục này chứa các thư mục cá nhân của những người có quyền truy cập vào hệ thống (local users’ home directories)
+/lib – thư mục này lưu các thư viện chia sẻ của hệ thống (system libraries)
+/lost+found – thư mục này được dùng để lưu các tập tin không có thư mục mẹ mà được tìm thấy dưới thư mục gốc (/) sau khi thực hiện lệnh kiểm tra hệ thống tập tin (fsck).
+/media – thư mục này được dùng để tạo ra các tập tin gắn (loaded) tạm thời được hệ thống tạo ra khi một thiết bị lưu động (removable media) được cắm vào như đĩa CDs, máy ảnh kỹ thuật số…
+/mnt – thư mục này được dùng để gắn các hệ thống tập tin tạm thời (mounted filesystems),
+/opt – thư mục dùng dể chứa các phần mềm ứng dụng (optional applications) đã được cài đặt thêm.
+/proc – đây là một thư mục đặc biệt linh động để lưu các thông tin về tình trạng của hệ thống, đặc biệt về các tiến trình (processes) đang hoạt động.
+/root – đây là thư mục nhà của người quản trị hệ thống (root).
+/sbin – thư mục này lưu lại các tập tin thực thi của hệ thống (system binaries)
+/sys – thư mục này lưu các tập tin của hệ thống (system files).
+/tmp – thư mục này lưu lại các tập tin được tạo ra tạm thời (temporary files).
+/usr – thư mục này lưu và chứa những tập tin của các ứng dụng chính đã được cài đặt cho mọi người dùng (all users).
+/var – thư mục này lưu lại tập tin ghi các số liệu biến đổi (variable files) như các tập tin dữ liệu và tập tin bản ghi (logs and databases).
+
+
+File thiết bị	Description
+/dev/console	Bàn giao tiếp hệ thống, là màn hình nối kết vật lý với hệ thống
+/dev/hd*	Giao diện driver cho các ổ cứng IDE. Thiết bị /dev/hda1 chỉ partition đầu tiên trên ổ cứng had. Thiết bị /dev/had chỉ toàn bộ ổ cứng hda.
+/dev/sd*	Giao diện driver cho các ổ đĩa SCSI. Những ổ đĩa và partition này có cùng quy ước với thiết bị IDE /dev/hd*.
+/dev/fd*	Driver thiết bị hỗ trợ đĩa mềm. Ổ đĩa mềm đầu tiên là /dev/fd0, ổ thứ hai là /dev/fd1.
+/dev/st*	Driver thiết bị cho ổ cứng băng từ SCSI.
+/dev/tty*	Driver cung cấp nhiều loại thiết bị giao tiếp khác nhau cho user nhập liệu. Sở dĩ viết tắt là tty bởi vì trước kia các terminal dạng teletype đều móc nối với hệ điều hành UNIX. Với Linux, những tập tin này hỗ trợ các thiết bị giao tiếp ảo, mà bạn có thể truy cập bằng cách bấm từ cho đến . Thiết bị giao tiếp ảo cho phép nhiều user đăng nhập cùng lúc.
+/dev/pty*	Driver hỗ trợ terminal giả, dùng cho việc đăng nhập từ xa, chẳng hạn như những phiên đăng nhập qua Telnet.
+/dev/ttyS*	Các cổng giao diện nối tiếp trên máy bạn. File /dev/ttyS0 tương ứng COM1 của MS-DOS. Nếu bạn sử dụng chuột nối tiếp, thì file /dev/mouse là một liên kết tượng trưng, nối với thiết bị ttyS tương ứng (Chuột nối kết với thiết bị này.)
+/dev/cua*	Các thiết bị đặc biệt gọi ra ngoài dùng với modem
+/dev/null	Một thiết bị rất đặc biệt, chủ yếu là một lỗ đen. Tất cả các dữ liệu ghi vào /dev/null xem như bị mất vĩnh viễn. Việc này hữu ích khi bạn muốn chạy một câu lệnh và thủ tiêu stdout hoặc stderr. Và nếu /dev/null dùng làm file nhập, bạn sẽ tạo ra một file có độ dài zero.
+
+/usr/bin	Lưu nhiều file thi hành của hệ thống.
+/usr/etc	Lưu nhiều file cấu hình hệ thống
+/usr/include	Tại đây và trong nhiều thư mục cấp dưới của /usr/include là nơi lưu tất cả các file kèm theo bộ biên dịch C. Những file header này định nghĩa các hằng và hàm dùng trong lập trình bằng C.
+/usr/g++-include	Lưu các file kèm theo bộ biên dịch C.
+/usr/lib	Chứa các thư viện để chương trình sử dụng trong khi kết nối
+/usr/share/man	Chứa các trang thủ công cho chương trình. Bên dưới /usr/share/man là nhiều thư mục tương ứng với các đoạn trong trang man.
+/dev/pty*	Driver hỗ trợ terminal giả, dùng cho việc đăng nhập từ xa, chẳng hạn như những phiên đăng nhập qua Telnet.
+/usr/src	Chứa các thư mục mã nguồn của nhiều chương trình trên hệ thống. Nếu nhận được gói phần mềm chờ cài đặt, bạn nên lưu vào /usr/src/tên-gói trước khi cài đặt.
+/usr/local	Dành riêng cho việc thiết kế hoặc tùy chỉnh các ứng dụng cho phù hợp với hệ thống máy bạn. Nhìn chung, hầu hết phần mềm dùng tại chỗ được lưu trong các thư mục cấp dưới của thư mục này
+
 #Lệnh tạo thư mục 
 mkdir
 
