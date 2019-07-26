@@ -192,6 +192,105 @@ Từ hệ thống tập tin họ đang trên. Giống như hầu hết tất c�
 mounting a drive on the /home directory
 
 
+# Sử dụng blin
+
+Bạn có thể sử dụng một liên kết gắn kết để làm cho 
+/mnt/store/hd2/homecũng có thể truy cập thông qua /home. Các mục fstab sẽ là
+
+From
+
+/dev/mapper/cl-home     /home            xfs     defaults        0 0
+/dev/mapper/cl-swap     swap            swap    defaults        0 0
+/dev/sda1   /mnt/store/hd2      ntfs    defaults,auto   0   0
+
+=>> to
+
+/dev/sda1  /mnt/store/hd2  ntfs
+/mnt/store/hd2/home  /home  bind
+
+
+#CACH 3
+
+1.Tạo một thư mục tạm thời cho ổ đĩa nhà mới của bạn:
+sudo mkdir /mnt/new_home
+
+2.Sao chép tất cả các tập tin của bạn vào ổ đĩa mới. 
+Nếu thành công, thì thư mục / mnt/new_home của bạn sẽ 
+trông giống hệt với thư mục /home của bạn. 
+
+3. duy chuyển 1 người dùng
+cp -axv /home/user_name /mnt/new_home #replacing user_name with the name of the user you want to copy.
+
+3+. duy chuyển tất cả người dùng
+
+cp -axv /home/* /mnt/new_home
+
+
+Các cờ được sử dụng ở đây là:
+
+-a : Chế độ lưu trữ, sao chép đệ quy, giữ quyền, v.v. 
+Nếu không có điều này, tất cả các tệp đã sao chép của bạn sẽ thuộc về người dùng root.
+
+-x : Đảm bảo rằng bản sao không theo các liên kết tượng trưng đến các ổ cứng khác. 
+Có thể không cần thiết trong trường hợp của bạn, 
+nhưng dù sao cũng không phải là một tiếng hét tồi
+
+-v : Verbose, hiển thị những gì đang được sao chép.
+Tôi muốn xem tiến độ để tôi biết bản sao vẫn hoạt động
+Lưu ý rằng các quyền của người dùng sẽ được áp dụng ở cuối bản sao,
+vì vậy đừng lo lắng nếu bạn thấy tất cả các tệp của mình ban đầu thuộc về root.
+
+4.
+Khi bạn hài lòng rằng mọi thứ đã được sao chép thành công, 
+chúng tôi sẽ trao đổi thư mục chính với thư mục mới. Đầu tiên chúng ta sẽ đổi tên thư mục nhà:
+
+sudo mv /home /home_old
+
+5.Sau đó, chúng tôi sẽ tạo một thư mục cho ổ đĩa mới để gắn kết:
+sudo mkdir /home
+
+6.
+Và cuối cùng gắn ổ đĩa. 
+Quay trở lại chương trình Đĩa và thay đổi điểm gắn kết từ /mnt/new_home sang /home.
+
+7. sudo nano /etc/fstab
+Tập tin này sẽ trông giống như thế này:
+
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/sda2 during installation
+UUID=4bcb0546-271c-4366-b294-9aa603dd4b72 /               ext4    errors=remount-ro 0       1
+# /boot/efi was on /dev/sda1 during installation
+UUID=4947-4AB8  /boot/efi       vfat    umask=0077      0       1
+# swap was on /dev/sda3 during installation
+UUID=884d6349-f03f-46a4-854e-d5af5d961f2c none            swap    sw              0       0
+UUID=88e85a4f-2421-4399-933b-930ea08c39e3 /home ext4 defaults 0 0
+
+
+
+Điều này cho thấy các ổ đĩa cứng (được xác định bởi UUID của chúng)
+theo sau là các điểm gắn kết của chúng. Kiểm tra xem chúng được đặt chính xác. 
+Nếu bạn thấy một vấn đề, sau đó chỉnh sửa tập tin, lưu và khởi động lại. 
+Bạn có thể khởi động lại với sudo restart.
+
+Nếu bạn không thể tìm ra những gì đã sai, thì bạn luôn có thể đặt thư mục nhà cũ của bạn trở lại vị trí cũ.
+Nhận xét dòng gắn kết ổ đĩa mới của bạn bằng cách đặt trước băm #và lưu (ổ đĩa mới của bạn sẽ là ổ gắn vào /home. 
+Sau đó ngắt kết nối ổ đĩa 
+sudo umount /home(hoặc khởi động lại nếu điều này không hoạt động, 
+chẳng hạn như nếu thiết bị đang bận) Sau đó, bạn có thể xóa thư mục mount thư mục chính 
+sudo rmdir /homevà di chuyển thư mục gốc cũ của bạn trở lại vị trí ban đầu, 
+sudo mv /home_old /homesau đó khởi động lại.
+
+Hy vọng rằng điều đó sẽ không xảy ra và mọi thứ sẽ hoạt động, nhưng thật tốt khi có Kế hoạch B (và C và Dứt)
+
+
+
+
 
 
 
