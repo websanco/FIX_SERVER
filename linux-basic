@@ -118,6 +118,32 @@ cd /home/game/bakups
 wordpress backups here
 
 
+cd /dev
+
+ls
+
+/** FILE SYSTEMT **/
+autofs           hugepages           port      tty1   tty26  tty42  tty59    vcs
+block            hwrng               ppp       tty10  tty27  tty43  tty6     vcs1
+bsg              initctl             ptmx      tty11  tty28  tty44  tty60    vcs6
+btrfs-control    input               pts       tty12  tty29  tty45  tty61    vcsa
+bus              kmsg                random    tty13  tty3   tty46  tty62    vcsa1
+char             kvm                 raw       tty14  tty30  tty47  tty63    vcsa6
+console          log                 rtc       tty15  tty31  tty48  tty7     vda
+core             loop-control        rtc0      tty16  tty32  tty49  tty8     vda1
+cpu              mapper              sda       tty17  tty33  tty5   tty9     vdb
+cpu_dma_latency  mcelog              sg0       tty18  tty34  tty50  ttyS0    vfio
+crash            mem                 shm       tty19  tty35  tty51  ttyS1    vga_arbiter
+disk             mqueue              snapshot  tty2   tty36  tty52  ttyS2    vhci
+dri              net                 snd       tty20  tty37  tty53  ttyS3    vhost-net
+fb0              network_latency     stderr    tty21  tty38  tty54  uhid     zero
+fd               network_throughput  stdin     tty22  tty39  tty55  uinput
+full             null                stdout    tty23  tty4   tty56  urandom
+fuse             nvram               tty       tty24  tty40  tty57  usbmon0
+hpet             oldmem              tty0      tty25  tty41  tty58  usbmon1
+
+
+
 
 
 
