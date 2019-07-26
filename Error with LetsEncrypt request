@@ -27,3 +27,7 @@ Connection: close
 
 
 HOW FIX
+
+
+ wget -O /usr/local/directadmin/scripts/letsencrypt.sh http://files1.directadmin.com/services/all/letsencrypt.sh
+
