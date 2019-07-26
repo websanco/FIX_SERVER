@@ -90,5 +90,8 @@ ls -l
 folder = r--r--.---  = 440 read--read--.---
 file =   rwxrwxrwx = 777 read write execute  read write execute  read write execute   421 421 421
 
+#-v in ra thông tin báo lỗi thành công hoặc thất bại
+mkdir -v <path_name>   
+
 
 
