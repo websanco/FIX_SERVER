@@ -183,6 +183,15 @@ và đảm bảo tất cả các tệp cũ và quyền của chúng sau đó đ�
 Hoặc gắn nó dưới / home2 và di chuyển một số người dùng.
 
 
+Câu 3:
+
+Điều gì sẽ xảy ra nếu tôi không bao giờ chỉ định một phân vùng được gắn trên các thư mục như / opt, / tmp, / usr ... 
+Họ lấy không gian đĩa từ đâu?
+Từ hệ thống tập tin họ đang trên. Giống như hầu hết tất cả các thư mục con / thư mục.
+
+mounting a drive on the /home directory
+
+
 
 
 
