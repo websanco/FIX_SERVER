@@ -49,6 +49,14 @@ File thiết bị	Description
 /usr/src	Chứa các thư mục mã nguồn của nhiều chương trình trên hệ thống. Nếu nhận được gói phần mềm chờ cài đặt, bạn nên lưu vào /usr/src/tên-gói trước khi cài đặt.
 /usr/local	Dành riêng cho việc thiết kế hoặc tùy chỉnh các ứng dụng cho phù hợp với hệ thống máy bạn. Nhìn chung, hầu hết phần mềm dùng tại chỗ được lưu trong các thư mục cấp dưới của thư mục này
 
+
+cd /usr
+/** FILE SYSTEMT **/
+bin               etc           games  include  lib64    local       sbin       share  tmp
+client_body_temp  fastcgi_temp  html   lib      libexec  proxy_temp  scgi_temp  src    uwsgi_temp
+
+
+
 #Lệnh tạo thư mục 
 mkdir
 
@@ -71,3 +79,16 @@ mount -o discard,defaults,noatime /dev/disk/by-id/scsi-0DO_Volume_volume-s1 /mnt
 
 # Change fstab so the volume will be mounted after a reboot
 $ echo '/dev/disk/by-id/scsi-0DO_Volume_volume-s1 /mnt/volume_s1 ext4 defaults,nofail,discard 0 0' | sudo tee -a /etc/fstab
+
+
+#tao folder voi safemode la 440   
+mkdir -m 440 folder
+
+#lệnh liệt kê file và phân quyền   
+ls -l
+
+folder = r--r--.---  = 440 read--read--.---
+file =   rwxrwxrwx = 777 read write execute  read write execute  read write execute   421 421 421
+
+
+
