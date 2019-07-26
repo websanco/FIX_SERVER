@@ -304,6 +304,68 @@ sudo mv /home_old /homesau đó khởi động lại.
 Hy vọng rằng điều đó sẽ không xảy ra và mọi thứ sẽ hoạt động, nhưng thật tốt khi có Kế hoạch B (và C và Dứt)
 
 
+# CÁCH 4
+
+
+[root@s1 /]# df -l
+
+Filesystem     1K-blocks     Used Available Use% Mounted on
+/dev/vda1       52417516 15546052  36871464  30% /
+devtmpfs          920860        0    920860   0% /dev
+tmpfs             941704        0    941704   0% /dev/shm
+tmpfs             941704    33140    908564   4% /run
+tmpfs             941704        0    941704   0% /sys/fs/cgroup
+tmpfs             188344        0    188344   0% /run/user/0
+
+
+Chúng tôi sẽ bắt đầu bằng cách tạo một thư mục mới /srv/home 
+nơi chúng tôi có thể gắn kết /dev/vda1 trong thời gian này.
+
+
+# mkdir -p /srv/home
+# mount /dev/vda1 /srv/home 
+
+Sau đó di chuyển nội dung của / home vào / srv / home
+(vì vậy chúng sẽ được lưu trữ thực tế trong / dev / sdb1 ) 
+bằng cách sử dụng lệnh rsync hoặc lệnh cp .
+
+# rsync -av /home/* /srv/home/
+OR
+# cp -aR /home/* /srv/home/
+
+Sau đó, chúng ta sẽ tìm thấy sự khác biệt giữa hai thư mục sử dụng công cụ diff , 
+nếu tất cả đều ổn, tiếp tục bước tiếp theo.
+
+# diff -r /home /srv/home
+
+
+Sau đó, xóa tất cả nội dung cũ trong / home như sau.
+rm -rf /home/*
+
+Next unmount /srv/home.
+# umount /srv/home
+
+
+Finally, we have to mount the filesystem /dev/sdb1 to /home for the mean time.
+
+# mount /dev/sdb1 /home
+# ls -l /home
+
+
+# blkid /dev/sdb1
+/dev/sdb1: UUID="e087e709-20f9-42a4-a4dc-d74544c490a6" TYPE="ext4" PARTLABEL="primary" PARTUUID="52d77e5c-0b20-4a68-ada4-881851b2ca99"
+
+UUID – specifies the block device, you can alternatively use the device file /dev/sdb1.
+/home – this is the mount point.
+etx4 – describes the filesystem type on the device/partition.
+defaults – mount options, (here this value means rw, suid, dev, exec, auto, nouser, and async).
+0 – used by dump tool, 0 meaning don’t dump if filesystem is not present.
+2 – used by fsck tool for discovering filesystem check order, this value means check this device after root filesystem.
+Save the file and reboot the system.
+
+You can run following command to see that /home directory has been successfully moved into a dedicated partition.
+
+
 
 
 
