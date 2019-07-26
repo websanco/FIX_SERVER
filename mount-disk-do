@@ -1,0 +1,1 @@
+sudo mkfs.ext4 /dev/disk/by-id/scsi-0DO_Volume_volume-s1
