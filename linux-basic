@@ -143,6 +143,19 @@ fuse             nvram               tty       tty24  tty40  tty57  usbmon0
 hpet             oldmem              tty0      tty25  tty41  tty58  usbmon1
 
 
+cd /dev/disk/by-uuid
+ls
+/** FILE SYSTEMT **/
+e64899eb-665e-41a9-b7da-ed5781a8b3aa
+
+
+
+sudoedit /etc/fstab
+UUID=e64899eb-665e-41a9-b7da-ed5781a8b3aa                       /                       xfs     defaults,uquota,gquota  0 1
+/dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-01 /mnt/volume-sgp1-01 ext4 defaults,nofail,discard 0 0
+/swapfile none swap defaults 0 0
+
+
 
 
 
