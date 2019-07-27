@@ -32,3 +32,8 @@ https://dash.cloudflare.com/65dcd6f7b952bec1b16a20374ee387e8/domain.com/dns
 TXT _acme-challenge tlSyWoIwrlv7zCUj1Ll7AnIhqo_7hRmCAVO6iINsiV4 5minutes
 
 remove old r9TDwoXtLbGuEXEcRdPpw4eS9R1uDfBo645GkMy-pjk
+
+http://server.server.com:2222/CMD_DNS_CONTROL?domain=domain.vip
+
+DNS MANAGER
+https://medium.com/@m.drossaerts/automating-lets-encrypt-wildcard-validation-with-directadmin-api-27f081f75ed0
