@@ -10,10 +10,13 @@ tmpfs             941704        0    941704   0% /sys/fs/cgroup
 tmpfs             188344        0    188344   0% /run/user/0
 
 
+Dinh dang luc dau
+
 sudo mkfs.ext4 /dev/disk/by-id/scsi-0DO_Volume_volume-s1
+
 # mkdir -p /srv/home
 # mount /dev/vda1 /srv/home 
-#rsync -av /home/* /srv/home/
+# rsync -av /home/* /srv/home/
 
 diff -r /home /srv/home
 rm -rf /home/*
@@ -72,6 +75,31 @@ resize2fs /dev/disk/by-id/scsi-0DO_Volume_volume-s1
 
 
 
+LINODE STORE
+
+mkfs.ext4 "/dev/disk/by-id/scsi-0Linode_Volume_scsi-0DO_Volume_volume-s1"
+
+mkdir "/mnt/scsi-0DO_Volume_volume-s1"
+
+mount "/dev/disk/by-id/scsi-0Linode_Volume_scsi-0DO_Volume_volume-s1" "/mnt/scsi-0DO_Volume_volume-s1"
+
+
+/dev/disk/by-id/scsi-0Linode_Volume_scsi-0DO_Volume_volume-s1 /mnt/scsi-0DO_Volume_volume-s1 ext4 defaults,noatime,nofail 0 2
+
+LINODE RESIZE
+Sau khi thay đổi kích thước âm lượng hoàn tất, bạn sẽ cần khởi động lại Linode của mình để các thay đổi có hiệu lực.
+Khi Linode của bạn đã được khởi động lại, hãy đảm bảo âm lượng không bị ngắt quãng để đảm bảo an toàn:
+
+umount /dev/disk/by-id/scsi-0Linode_Volume_scsi-0DO_Volume_volume-s1
+
+Giả sử bạn có phân vùng ext2, ext3 hoặc ext4, trước tiên hãy chạy kiểm tra hệ thống tệp, sau đó thay đổi kích thước để điền kích thước âm lượng mới:
+
+
+e2fsck -f /dev/disk/by-id/scsi-0Linode_Volume_scsi-0DO_Volume_volume-s1
+
+resize2fs /dev/disk/by-id/scsi-0Linode_Volume_scsi-0DO_Volume_volume-s1
+
+mount /dev/disk/by-id/scsi-0Linode_Volume_scsi-0DO_Volume_volume-s1 /mnt/scsi-0DO_Volume_volume-s1
 
 
  
