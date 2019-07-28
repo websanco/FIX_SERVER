@@ -3,3 +3,16 @@ e2fsck -f /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-01
 resize2fs /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-01
 
 mount /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-01 /mnt/volume_sgp1_01
+
+
+
+6
+
+mount /dev/sda /mnt
+
+dd if=/dev/vda of=/mnt/da.iso
+
+
+apt install -y nginx
+sed -i 's/\/var\/www\/html/\/mnt/' /etc/nginx/sites-enabled/default
+service nginx restart
