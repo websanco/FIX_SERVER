@@ -1,0 +1,5 @@
+
+date
+yum install ntp ntpdate
+yum install -y ntpdate
+ntpdate asia.pool.ntp.org
