@@ -30,7 +30,8 @@ mount -o discard,defaults,noatime /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-01
 df -l
 
 mkdir -p /home/admin
-mkdir -p /home/admin_backups
+cd /home/admin
+mkdir domains
 
 
 DISK 2
@@ -44,7 +45,20 @@ mkdir -p /home/admin
 mkdir -p /home/admin_backups
 mkdir -p /home/domains
 
+
+ls -l
+chown admin:admin /home/admin
+
+chown -R admin:admin /home/admin
+
+admin: ten user so huu
+admin: ten group so huu
+
+
+
 df -l
+
+sudo mkfs.ext4 /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-02
 umount /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-02
 e2fsck -f /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-02
 resize2fs /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-02
