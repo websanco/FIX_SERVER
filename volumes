@@ -27,5 +27,10 @@ umount /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-01
 e2fsck -f /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-01
 resize2fs /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-01
 mount -o discard,defaults,noatime /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-01 /home
+df -l
+
+mkdir -p /home/admin
+mkdir -p /home/admin_backups
+
 
 
