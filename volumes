@@ -30,8 +30,24 @@ mount -o discard,defaults,noatime /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-01
 df -l
 
 mkdir -p /home/admin
-cd /home/admin
-mkdir domains
+mkdir -p /home/admin//domains
+mkdir -p /home/admin/admin_backups
+mkdir -p /home/admin/user_backups
+mkdir -p /home/admin/Maildir
+
+chown admin:admin /home/admin
+chown admin:access /home/admin/domains
+chown admin:admin /home/admin/admin_backups
+chown admin:mail /home/admin/Maildir
+chown admin:admin /home/admin/user_backups
+
+drwx--x--x 4 admin admin  12288 Jul 30 15:31 admin_backups
+drwxr-x--- 4 admin access  4096 Jun 17 04:29 domains
+drwxrwx--- 6 admin mail    4096 Jun 17 04:30 Maildir
+drwx--x--x 2 admin admin   4096 Jun 17 04:29 user_backups
+
+
+
 
 
 DISK 2
