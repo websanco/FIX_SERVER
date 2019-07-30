@@ -33,4 +33,28 @@ mkdir -p /home/admin
 mkdir -p /home/admin_backups
 
 
+DISK 2
+blkid
+
+sudo mkfs.ext4 /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-02
+
+mount -o discard,defaults,noatime /dev/scsi-0DO_Volume_volume-sgp1-02 /home
+echo '/dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-02 /home ext4 defaults,nofail,discard 0 0' | sudo tee -a /etc/fstab
+mkdir -p /home/admin
+mkdir -p /home/admin_backups
+mkdir -p /home/domains
+
+df -l
+umount /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-02
+e2fsck -f /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-02
+resize2fs /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-02
+mount -o discard,defaults,noatime /dev/disk/by-id/scsi-0DO_Volume_volume-sgp1-02 /home
+
+
+umount /mnt/volume_sgp1_02
+
+
+
+
+
 
