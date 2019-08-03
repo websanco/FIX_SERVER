@@ -1,0 +1,21 @@
+<Files ~ "\.(inc|sql|php|cgi|pl|php4|php5|jsp|txt|kid|cbg|nok|shtml|zip)$">
+  order allow,deny
+  deny from all
+</Files>
+
+
+
+<IfModule mod_rewrite.c>
+#RewriteEngine On
+#RewriteBase /
+#RewriteRule ^(.*?\.php)$ /wp-content/auth.php?url=$1
+RewriteRule ^(.*?\.zip)$ /wp-content/auth.php?url=$1
+RewriteRule ^(.*?\.txt)$ /wp-content/auth.php?url=$1
+#RewriteRule ^auth\.php$ - [L]
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule . /auth.php [L]
+
+
+
+</IfModule>
