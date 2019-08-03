@@ -1,0 +1,25 @@
+$arr = explode("/", $string, 2);
+$first = $arr[0];
+
+$mystring = 'home/cat1/subcat2/';
+$first = strtok($mystring, '/');
+echo $first; // home
+
+$string = 'The quick brown fox jumped over the lazy dog';
+$substring = substr($string, 0, strpos($string, ' '));
+
+$haystack  = 'The quick brown foxed jumped over the etc etc.';
+$needle    = ' ';
+echo strstr($haystack, $needle, true);
+
+$string = "The quick brown fox jumped over the etc etc.";
+
+$splitter = " ";
+
+$pieces = explode($splitter, $string);
+
+echo $pieces[0];
+
+
+$domain_parts = explode('.', $domain);
+$domain_select = $domain_parts[0]; 
