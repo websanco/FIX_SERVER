@@ -1,0 +1,125 @@
+<?php 
+
+
+function get_client_ip() {
+    $ipaddress = '';
+    if (isset($_SERVER['HTTP_CLIENT_IP']))
+        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+    else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    else if(isset($_SERVER['HTTP_X_FORWARDED']))
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+    else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+    else if(isset($_SERVER['HTTP_FORWARDED']))
+        $ipaddress = $_SERVER['HTTP_FORWARDED'];
+    else if(isset($_SERVER['REMOTE_ADDR']))
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
+}
+
+$broser =$_SERVER['HTTP_USER_AGENT'];
+//echo $broser;
+$broser_len = strlen($broser);
+
+function get_browser_properties(){
+
+$browser =array();
+
+$agent=$_SERVER['HTTP_USER_AGENT'];
+
+if(stripos($agent,"firefox")!==false){
+
+$browser['browser'] = 'Firefox'; // Set Browser Name
+
+$domain = stristr($agent, 'Firefox');
+
+$split =explode('/',$domain);
+
+$browser['version'] = $split[1]; // Set Browser Version
+
+}
+
+if(stripos($agent,"Opera")!==false){
+
+$browser['browser'] = 'Opera'; // Set Browser Name
+
+$domain = stristr($agent, 'Version');
+
+$split =explode('/',$domain);
+
+$browser['version'] = $split[1]; // Set Browser Version
+
+}
+
+if(stripos($agent,"MSIE")!==false){
+
+$browser['browser'] = 'Internet Explorer'; // Set Browser Name
+
+$domain = stristr($agent, 'MSIE');
+
+$split =explode(' ',$domain);
+
+$browser['version'] = $split[1]; // Set Browser Version
+
+}
+
+if(stripos($agent,"Chrome")!==false){
+
+$browser['browser'] = 'Google Chrome'; // Set Browser Name
+
+$domain = stristr($agent, 'Chrome');
+
+$split1 =explode('/',$domain);
+
+$split =explode(' ',$split1[1]);
+
+$browser['version'] = $split[0]; // Set Browser Version
+
+}
+
+if(stripos($agent,"coc_coc_browser")!==false){
+
+$browser['browser'] = 'coccoc'; // Set Browser Name
+
+$domain = stristr($agent, 'coccoc');
+
+$split1 =explode('/',$domain);
+
+$split =explode(' ',$split1[1]);
+
+$browser['version'] = $split[0]; // Set Browser Version
+
+}
+
+
+else if(stripos($agent,"Safari")!==false){
+
+$browser['browser'] = 'Safari'; // Set Browser Name
+
+$domain = stristr($agent, 'Version');
+
+$split1 =explode('/',$domain);
+
+$split =explode(' ',$split1[1]);
+
+$browser['version'] = $split[0]; // Set Browser Version
+
+}
+
+return $browser;
+
+}
+
+$browser_properties = get_browser_properties();
+
+
+if (array_key_exists("browser",$browser_properties))
+{
+die('key no access');
+}else{
+	die('key no access');
+}
+
