@@ -1,0 +1,2 @@
+cd /usr/local/directadmin/scripts
+./getLicense.sh 35625 157073 207.148.67.81 change ip DA
