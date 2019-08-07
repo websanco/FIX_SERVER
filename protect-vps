@@ -23,3 +23,18 @@ tcp | in | d = 3306 | s = 11,22.33.44
 
 # TCP connections outbound to port 22 on IP 11.22.33.44
 tcp|out|d=22|d=11.22.33.44
+
+
+tcp | in |  d = 3306 | s = 0.0.0.0/0
+tcp | out |  d = 3306 | d = 0.0.0.0/0
+
+# tcp/udp|in/out|s/d=port,port,...|s/d=ip
+
+
+vi csf.deny
+
+
+OK
+
+I added the following to csf.deny
+tcp|in|d=22|s=0.0.0.0
