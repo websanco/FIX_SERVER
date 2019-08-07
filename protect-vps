@@ -135,6 +135,8 @@ chmod 700 cronfire.sh
 
 crontab -e
 0 */4  *  *  * /home/cronfire.sh
+*/1 * * * * /home/cronfire.sh
+
 
 4 gio
 
@@ -150,8 +152,26 @@ cat ip.txt > csf.allow
 cat /var/spool/cron/root
 
 
+ .---------------- minute (0 - 59) 
+ |  .------------- hour (0 - 23)
+ |  |  .---------- day of month (1 - 31)
+ |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ... 
+ |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7)  OR sun,mon,tue,wed,thu,fri,sat 
+ |  |  |  |  |
+ *  *  *  *  *  <command to be executed>
 
 
+
+service crond start
+
+o start the cron service, use:
+# /etc/init.d/crond start
+
+OR RHEL/CentOS 5.x/6.x user:
+# service crond start
+
+OR RHEL/Centos Linux 7.x user:
+# systemctl start crond.service
 
 
 
