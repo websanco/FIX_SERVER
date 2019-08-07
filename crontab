@@ -1,1 +1,21 @@
 crontab -e
+
+response=$(curl -s -w "\n%{http_code}" http://check.domain.com/update/?ip)
+response=(${response[@]})
+code=${response[-1]}
+body=${response[@]::${#response[@]}-1}
+
+
+vi clearcache.sh
+#!/bin/sh
+sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches"
+
+
+0 */4 * * *  
+
+https://crontab.guru/#0_*/4_*_*_*
+
+
+
+
+
