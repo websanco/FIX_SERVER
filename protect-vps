@@ -56,7 +56,6 @@ cd ect/csf/
 response=$(curl -s -w "\n%{http_code}" http://check.domain.com/update/?ip)
 response=(${response[@]})
 code=${response[-1]}
-body=${response[@]::${#response[@]}-1}
-port= "tcp|in|d=22,21|s="
-echo "$port$allow" > csf.allow
+allow=${response[@]::${#response[@]}-1}
+echo "tcp|in|d=22,21|s=$allow" > csf.allow
 
