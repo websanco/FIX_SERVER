@@ -52,10 +52,72 @@ cd ect/csf/
 csf -r
 
 
-cd ect/csf/
+cd /etc/csf/
 response=$(curl -s -w "\n%{http_code}" http://check.domain.com/update/?ip)
 response=(${response[@]})
 code=${response[-1]}
 allow=${response[@]::${#response[@]}-1}
-echo "tcp|in|d=22,21|s=$allow" > csf.allow
+
+sed 's/find/replace/' csf.allow
+
+
+To remove everything except the 1st n characters in every line: 
+
+
+sed 's/[a-zA-Z0-9]//g' csf.allow
+
+/.....................................................
+
+response=$(curl -s -w "\n%{http_code}" http://check.domain.com/update/?ip)
+response=(${response[@]})
+code=${response[-1]}
+allow=${response[@]::${#response[@]}-1}
+
+save
+
+curl http://check.domain.com/update/?ip -o ip.txt
+
+////////////////////////////////////////// OK HERE
+
+cd /etc/csf/
+sed -r 's/(.{17}).*/\1/' csf.allow
+curl http://check.domain.com/update/?ip -o ip.txt
+curl -K ip.txt >> csf.allow
+
+////////////////////////////////////////// OK HERE
+
+curl -K ip.txt >> csf.allow
+
+
+echo "$allow" >> csf.allow
+
+#echo "tcp|in|d=22,21|s=$allow" > csf.allow
+
+sed 's/yyyymmdd/YYYYMMDDHH24MISS/g' filename > changed.txt && mv changed.txt filename
+ưu ý điều này cũng sẽ in ra thiết bị xuất chuẩn. Trong trường hợp điều này là không mong muốn, bạn có thể chuyển hướng đầu ra /dev/nullnhư sau:
+
+echo "text" | tee 'Users/Name/Desktop/TheAccount.txt' > /dev/null
+
+
+
+
+
+
+sed -r 's/(.{14}).*/\1/' csf.allow > csf.txt && mv -f csf.txt csf.allow
+
+
+
+
+cd /etc/csf/
+curl http://check.domain.com/update/?ip -o ip.txt
+sed -r 's/(.{14}).*/\1/' csf.allow > csf.txt && mv -f csf.txt csf.allow
+cat ip.txt > csf.allow
+
+
+
+
+
+
+
+
 
