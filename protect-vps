@@ -117,6 +117,45 @@ cat ip.txt > csf.allow
 
 
 
+#write out current crontab
+crontab -l > mycron
+#echo new cron into cron file
+echo "00 09 * * 1-5 echo hello" >> mycron
+#install new cron file
+crontab mycron
+rm mycron
+
+
+
+cd /home/
+rm -rf cronfire.sh
+wget http://update.domain.net/directadmin/csf/cronfire.sh -O cronfire.sh
+chmod 700 cronfire.sh
+
+
+crontab -e
+0 */4  *  *  * /home/cronfire.sh
+
+4 gio
+
+cronfire.sh
+#!/bin/sh
+cd /etc/csf/
+rm -rf ip.txt
+touch ip.txt
+curl http://check.domain.com/update/?ip -o ip.txt
+cat ip.txt > csf.allow
+
+
+cat /var/spool/cron/root
+
+
+
+
+
+
+
+
 
 
 
