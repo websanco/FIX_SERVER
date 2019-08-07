@@ -48,4 +48,8 @@ csf.allow
 tcp|in|d=22|s=14.240.0.0/12   
 
 
+cd ect/csf/
+csf -r
+
+
 
