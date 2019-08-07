@@ -1,1 +1,25 @@
 protect-vps
+
+limited access port vps directadmin
+
+iptables
+
+tcp/udp|in/out|s/d=port|s/d=ip|u=uid
+tcp/udp : EITHER tcp OR udp OR icmp protocol
+in/out : EITHER incoming OR outgoing connections
+s/d=port : EITHER source OR destination port number (or ICMP type)
+(use a _ for a port range, e.g. 2000_3000)
+s/d=ip : EITHER source OR destination IP address
+u/g=UID : EITHER UID or GID of source packet, implies outgoing connections, s/d=IP value is ignored
+
+
+Examples:
+
+# TCP connections inbound to port 3306 from IP 11.22.33.44
+tcp|in|d=3306|s=11.22.33.44
+
+# Kết nối TCP gửi đến cổng 3306 từ IP 11,22,33.44 
+tcp | in | d = 3306 | s = 11,22.33.44
+
+# TCP connections outbound to port 22 on IP 11.22.33.44
+tcp|out|d=22|d=11.22.33.44
