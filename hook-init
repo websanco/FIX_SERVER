@@ -1,0 +1,15 @@
+ất cả các hook được thực thi sau khi ứng dụng WordPress cốt lõi hoàn thành quá trình tải của nó.
+
+Vì vậy, móc khởi tạo chủ yếu được sử dụng để khởi tạo quy trình trong plugin và chủ đề.
+
+Các hook init có sẵn trong WordPress, theo thứ tự thực hiện của chúng là -
+
+1) init -> chạy sau khi WordPress tải xong nhưng trước khi bất kỳ tiêu đề nào được gửi. Nói chung, điều này được sử dụng bởi các plugin để khởi tạo quy trình của họ.
+
+2) widget_init -> được sử dụng để đăng ký các tiện ích thanh bên của ứng dụng. Các register_widgetfunctionđược thực hiện trong vòng móc này.
+
+3) admin_init -> được thực thi như hành động đầu tiên, khi người dùng truy cập vào phần quản trị của WordPress. Nói chung, nó được sử dụng để khởi tạo các cài đặt dành riêng cho khu vực quản trị.
+
+admin_init hook chạy mỗi khi trang quản trị được hiển thị.
+
+Bạn cũng có thể xem qua Wordpress Codex để biết thêm thông tin về quy trình kích hoạt.
