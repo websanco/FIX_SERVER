@@ -7,3 +7,9 @@ ntpdate asia.pool.ntp.org
 
 # rm -f /etc/localtime
 # ln -s /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
+
+
+HTACCESS
+# Adjust default time zone
+
+SetEnv TZ America/Washington
