@@ -29,3 +29,6 @@ netstat -an | grep :80 | awk '{print $6}' | sort | uniq -c
 
 watch "netstat -an | grep ':80' | awk '{print \$5}' | sed s/'::ffff:'// | cut -d\":\" -f1 | sort | uniq -c"
 watch "netstat -an | grep :80 | awk '{print \$6}' | sort | uniq -c"
+
+top -c
+ctrl + m
