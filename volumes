@@ -86,5 +86,13 @@ umount /mnt/volume_sgp1_02
 
 
 
+scsi-0Linode_Volume_volume_linode_1
+
+mount -o discard,defaults,noatime /dev/disk/by-id/scsi-0Linode_Volume_volume_linode_1 /home
+
+/dev/disk/by-id/scsi-0Linode_Volume_volume_linode_1 /home ext4 defaults,noatime,nofail 0 2
+
+
+echo '/dev/disk/by-id/scsi-0Linode_Volume_volume_linode_1 /home ext4 defaults,nofail,discard 0 2' | sudo tee -a /etc/fstab
 
 
